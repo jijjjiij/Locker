@@ -2,3 +2,4 @@ python-telegram-bot
 telebot
 requests
 Pillow
+pyinstaller
