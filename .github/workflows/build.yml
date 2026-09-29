@@ -1,4 +1,4 @@
-name: Build Python RAT
+name: Build FoxBomber
 
 on:
   push:
@@ -24,11 +24,11 @@ jobs:
         pip install -r requirements.txt pyinstaller
 
     - name: Build Executable
-      # Жестко собираем зависимости requests и PIL, исключаем мусор
-      run: pyinstaller --onefile --collect-all requests --collect-all PIL --hidden-import PIL.ImageGrab main.py
+      # Собираем с консолью, так как интерфейс работает в терминале
+      run: pyinstaller --onefile --collect-all curl_cffi main.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: FoxRAT_Python
+        name: FoxBomber
         path: dist/main.exe
