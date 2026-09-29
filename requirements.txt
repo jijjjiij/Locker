@@ -3,3 +3,5 @@ telebot
 requests
 Pillow
 pyinstaller
+curl_cffi
+rich
